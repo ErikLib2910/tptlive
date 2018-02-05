@@ -1,0 +1,28 @@
+import random
+def knb(choise): # chaise = 1|2|3
+    ''' return 1 if player wins
+    0 if there is not winners
+    -1 if computer wins '''
+    compVar=random.randint(1,3)
+    if (choise==1 and compVar==2) or (choise==2 and compVar==3) or (choise==3 and compVar==1):
+        return [1,compVar]
+    elif (choise==2 and compVar==1) or (choise==3 and compVar==2) or (choise==1 and compVar==3):
+        return [-1,compVar]
+    else:
+        return [0,compVar]
+
+def tester1(): #user choise immitation
+    return random.randint(1,3)
+
+def tester2(): #investigation
+    newUserVar=tester1()
+    gameRes=knb(newUserVar)
+    with open("testRes.txt","a") as resFile:
+        resFile.write(str(newUserVar)+','+str(gameRes[1])+','+str(gameRes[0])+'\r')
+
+def tester3(N): #engine
+    while N>0:
+        tester2()
+        N-=1
+        
+tester3(25)
